@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_basic_info"
+            android:icon="@drawable/basic_info"
+            android:title="Basic Information" />
+        <item
+            android:id="@+id/nav_business_info"
+            android:icon="@drawable/business"
+            android:title="Business Information" />
+        <item
+            android:id="@+id/nav_membership"
+            android:icon="@drawable/baseline_card_membership_black_18"
+            android:title="Membership Packages" />
+        <item
+            android:id="@+id/nav_invite_review"
+            android:icon="@drawable/baseline_rate_review_black_18"
+            android:title="Invite to Review" />
+        <item
+            android:id="@+id/nav_updates"
+            android:icon="@drawable/baseline_update_black_18"
+            android:title="Dulhaniyaa Updates" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/round_settings_black_18"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_contact_support"
+            android:icon="@drawable/round_contact_support_black_18"
+            android:title="Contact Support" />
+        <item
+            android:id="@+id/nav_rate_on_playstore"
+            android:icon="@drawable/round_stars_black_18"
+            android:title="Rate on Playstore" />
+    </group>
+
+
+</menu>

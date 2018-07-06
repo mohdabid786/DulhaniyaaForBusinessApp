@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "365218809654",
+    "firebase_url": "https://dulhaniyaaforbusinessapp.firebaseio.com",
+    "project_id": "dulhaniyaaforbusinessapp",
+    "storage_bucket": "dulhaniyaaforbusinessapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:365218809654:android:27841b6f3345c9dd",
+        "android_client_info": {
+          "package_name": "com.dulhaniyaa.dulhaniyaaforbusinessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "365218809654-95l0eovubfr0qj6jv1iioasooq24um1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulhaniyaa.dulhaniyaaforbusinessapp",
+            "certificate_hash": "5cfb3ab7503e1f172d62a25b557b155fb992f6b3"
+          }
+        },
+        {
+          "client_id": "365218809654-fjk0t6cq3cs1n2fsh0nvc3vcnt9hu8h5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkmmCy07bdtTIHKh4gK8ad3OERv9i50Hw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "365218809654-fjk0t6cq3cs1n2fsh0nvc3vcnt9hu8h5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
