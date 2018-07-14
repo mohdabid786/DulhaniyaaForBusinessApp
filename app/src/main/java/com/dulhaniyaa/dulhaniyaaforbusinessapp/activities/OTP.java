@@ -1,6 +1,7 @@
 package com.dulhaniyaa.dulhaniyaaforbusinessapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -30,11 +31,15 @@ public class OTP extends AppCompatActivity {
     String verifactionCode,business_name, username, password, phone, category, city;
     EditText edit1,edit2,edit3,edit4;
     String code;
+    SharedPreferences spLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
+        spLogin = getSharedPreferences("LOGINSP",MODE_PRIVATE);
+
+
 
         btn_verify=(Button)findViewById(R.id.btn_verify);
         edit1=(EditText)findViewById(R.id.edit1);
@@ -44,7 +49,7 @@ public class OTP extends AppCompatActivity {
 
         try {
             verifactionCode = getIntent().getStringExtra("verification");
-            business_name=getIntent().getStringExtra("name");
+            business_name=getIntent().getStringExtra("business_name");
             username=getIntent().getStringExtra("email");
             phone=getIntent().getStringExtra("phone");
             category=getIntent().getStringExtra("category");
@@ -159,8 +164,14 @@ public class OTP extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     if (response.body().getStatus().equals("SUCCESS")) {
-                        SharedPreferenceWriter.getInstance(OTP.this).writeStringValue(SharedPreferenceKey.token, response.body().getSignup().getToken());
+//                        SharedPreferenceWriter.getInstance(OTP.this).writeStringValue(SharedPreferenceKey.token, response.body().getVendorSignup().getToken());
                         SharedPreferenceWriter.getInstance(OTP.this).writeBooleanValue(SharedPreferenceKey.currentLogin,true);
+
+                        SharedPreferences.Editor logedit = spLogin.edit();
+                        logedit.putBoolean("LOGIN_CHECK",true);
+                        // logedit.apply();
+                        logedit.commit();
+
                         Intent intent = new Intent(OTP.this, Home.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

@@ -1,27 +1,29 @@
 package com.dulhaniyaa.dulhaniyaaforbusinessapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.R;
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.adapter.GetAllCategoryAdapter;
+import com.dulhaniyaa.dulhaniyaaforbusinessapp.adapter.GetAllStateAdapter;
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.bean.CommonResponse;
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.bean.GetAllCateogry;
+
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.database.SharedPreferenceWriter;
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.retrofit.ApiClient;
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.retrofit.ApiInterface;
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.retrofit.MyDialog;
 import com.dulhaniyaa.dulhaniyaaforbusinessapp.util.SharedPreferenceKey;
+
 
 import java.util.ArrayList;
 
@@ -30,18 +32,22 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class SignUp extends AppCompatActivity implements View.OnClickListener {
+public class SignUp extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+
+//    private EditText category, city;
+
+    private ArrayList<String> mCategoryList;
+    private String catNameList;
+    private String catIdList;
+    private ArrayList<String> mCityList;
+    private String nameList;
+    private String mSpinnerStateItem, mSpinnerCategoryItem;
 
     private Spinner category, city;
-    private GetAllCategoryAdapter getAllCategoryAdapter;
-    ArrayList<GetAllCateogry> getAllCategoryArrayList;
-    ArrayList<GetAllCateogry> getAllCategoryArrayListClone;
-    ArrayList<GetAllCateogry> arrayList;
-    GetAllCategoryInterface getAllCategoryInterface;
-    ArrayList<GetAllCateogry> getAllCategoryList;
 
     private EditText business_name, username, password, phone;
     private Button signup;
+    SharedPreferences spLogin;
 
     @Override
 
@@ -49,6 +55,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        spLogin = getSharedPreferences("LOGINSP", MODE_PRIVATE);
 
         business_name = findViewById(R.id.business_name);
         username = findViewById(R.id.username);
@@ -64,14 +72,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         password.setOnClickListener(this);
         phone.setOnClickListener(this);
         category.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
-        //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter aa = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item,getAllCategoryArrayList);
-        aa.setDropDownViewResource(android.R.layout.
-                simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
-        category.setAdapter(aa);
-        city.setOnClickListener(this);
+        city.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
         signup.setOnClickListener(this);
 
     }
@@ -85,10 +86,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.category:
                 callCategoryApi();
-
+            case R.id.city:
+                callCityApi();
 
         }
     }
+
 
     private void callVerificationCodeApi() {
         MyDialog.getInstance(this).showDialog();
@@ -103,14 +106,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 if (response.isSuccessful()) {
                     Toast.makeText(SignUp.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     if (response.body().getStatus().equals("SUCCESS")) {
-                        SharedPreferenceWriter.getInstance(SignUp.this).writeStringValue(SharedPreferenceKey.token,
-                                response.body().getSignup().getToken());
+//                        SharedPreferenceWriter.getInstance(SignUp.this).writeStringValue(SharedPreferenceKey.token,
+//                                response.body().getVendorSignup().getToken());
                         Intent intent = new Intent(SignUp.this, OTP.class);
                         intent.putExtra("verification", response.body().getVerificationCode());
-                        intent.putExtra("name", business_name.getText().toString());
+                        intent.putExtra("business_name", business_name.getText().toString());
                         intent.putExtra("email", username.getText().toString());
-                        intent.putExtra("phone", phone.getText().toString());
                         intent.putExtra("password", password.getText().toString());
+                        intent.putExtra("phone", phone.getText().toString());
                         intent.putExtra("category", category.getOnItemSelectedListener().toString());
                         intent.putExtra("city", city.getOnItemSelectedListener().toString());
                         startActivity(intent);
@@ -155,8 +158,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         MyDialog.getInstance(SignUp.this).showDialog();
         Retrofit retrofit = ApiClient.getClient();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call<CommonResponse> call = apiInterface.getGetAllCateogryResult(SharedPreferenceWriter.getInstance(SignUp.this)
-                .getString(SharedPreferenceKey.token));
+        Call<CommonResponse> call = apiInterface.getGetAllCateogryResult();
 
         call.enqueue(new Callback<CommonResponse>() {
             @Override
@@ -164,25 +166,27 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 MyDialog.getInstance(SignUp.this).hideDialog();
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equals("SUCCESS")) {
-                        //here,we get all the response of Home api.using getter method,like getHome(),we got the response.here response is comeing in array form,so to store this we take arraylist type variable which is globally declared above
-                        getAllCategoryArrayList = (ArrayList<GetAllCateogry>) response.body().getGetAllCateogry();
+                        if (response.isSuccessful()) {
+                            for (int i = 0; i < response.body().getGetAllCateogry().size(); i++) {
+                                catNameList = response.body().getGetAllCateogry().get(i).getCatName();
+                                catIdList = response.body().getGetAllCateogry().get(i).getCatId();
+                                mCategoryList.add(catNameList);
 
-                        getAllCategoryArrayListClone = new ArrayList<GetAllCateogry>();
-                        arrayList = new ArrayList<>();
-                        getAllCategoryArrayListClone.addAll(getAllCategoryArrayList);
-                        arrayList.addAll(getAllCategoryArrayListClone);
+                            }
 
-                        //
-                        getAllCategoryInterface.getGetAllCategoryList(arrayList);
-
-                        //here response is comeing in List form,so to store homeResponseArrayList,we declare homeResponseArrayList as blank list like  ArrayList<HomeResponse> homeResponseArrayList;
-                        //to call HomeAdapter on Home Fragment using constructor made in HomeAdapter class
-                        getAllCategoryAdapter = new GetAllCategoryAdapter(SignUp.this, getAllCategoryArrayList, SignUp.this);
-                        // Attach the adapter to a recyclerview
-                        category.setAdapter((SpinnerAdapter) getAllCategoryAdapter);//on recyclerview we set the adapter.
-
-                    } else {
-                        Toast.makeText(SignUp.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            GetAllCategoryAdapter setCityAdapter = new GetAllCategoryAdapter(SignUp.this,
+                                    R.layout.simple_spinner_item, mCategoryList);
+                            category.setAdapter(setCityAdapter);
+                        } else {
+                            if (response.body().getMessage().equals("Invalid User.")) {
+                                Intent intent = new Intent(SignUp.this, Login.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
                     }
                 }
             }
@@ -191,8 +195,60 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             public void onFailure(Call<CommonResponse> call, Throwable t) {
                 MyDialog.getInstance(SignUp.this).hideDialog();
             }
+
         });
     }
+
+
+    private void callCityApi() {
+
+        MyDialog.getInstance(SignUp.this).showDialog();
+        Retrofit retrofit = ApiClient.getClient();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call<CommonResponse> call = apiInterface.getGetAllStateResult();
+
+        call.enqueue(new Callback<CommonResponse>() {
+            @Override
+            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+                MyDialog.getInstance(SignUp.this).hideDialog();
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus().equals("SUCCESS")) {
+                        if (response.isSuccessful()) {
+                            for (int i = 0; i < response.body().getGetAllState().size(); i++) {
+
+                                nameList = response.body().getGetAllState().get(i).getStateName();
+                                mCityList.add(nameList);
+
+                            }
+
+                            GetAllStateAdapter setCityAdapter = new GetAllStateAdapter(SignUp.this,
+                                    R.layout.simple_spinner_item, mCityList);
+                            city.setAdapter(setCityAdapter);
+
+                        } else {
+                            if (response.body().getMessage().equals("Invalid User.")) {
+
+                                Intent intent = new Intent(SignUp.this, Login.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<CommonResponse> call, Throwable t) {
+                MyDialog.getInstance(SignUp.this).hideDialog();
+            }
+
+        });
+    }
+
 
     void checkSignup() {
         boolean flag = true;
@@ -208,10 +264,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         } else if (phone.getText().toString().equals("")) {
             Toast.makeText(SignUp.this, "Please enter phone number", Toast.LENGTH_LONG).show();
             flag = false;
-        } else if (category.equals("")) {
+        } else if (mSpinnerCategoryItem.equals("")) {
             Toast.makeText(SignUp.this, "Please select category", Toast.LENGTH_LONG).show();
             flag = false;
-        } else if (city.equals("")) {
+        } else if (mSpinnerStateItem.equals("")) {
             Toast.makeText(SignUp.this, "Please select city", Toast.LENGTH_LONG).show();
             flag = false;
         } else {
@@ -219,8 +275,24 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
-    public interface GetAllCategoryInterface {
-        public void getGetAllCategoryList(ArrayList<GetAllCateogry> homeResponseArrayListsss);
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        getCategorySpinnerItem(parent.getItemAtPosition(position) + "");
+        getCitySpinnerItem(parent.getItemAtPosition(position)+"");
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    private void getCategorySpinnerItem(String spinnerItems) {
+        mSpinnerCategoryItem = spinnerItems;
+    }
+    private void getCitySpinnerItem(String spinnerItems) {
+        mSpinnerStateItem = spinnerItems;
     }
 }
 

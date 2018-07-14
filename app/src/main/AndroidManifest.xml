@@ -44,7 +44,22 @@
             android:name="io.fabric.ApiKey"
             android:value="fcce1eb7518ccc8b21eda4ccbcea63e429e31f39" />
 
-        <activity android:name=".activities.DulhaiyaaUpdates"></activity>
+        <activity android:name=".activities.DulhaiyaaUpdates" />
+        <activity android:name=".activities.ChangePassword" />
+        <activity android:name=".activities.ForgotPassword" />
+        <activity android:name=".activities.ResetPassword" />
+        <activity android:name=".activities.Inbox" />
+        <activity android:name=".activities.Calls" />
+        <activity android:name=".activities.ContactClicks" />
+        <activity android:name=".activities.ViewLists" />
+        <activity android:name=".activities.ShortListMe" />
+        <activity android:name=".activities.FinalizedMe" />
+        <activity android:name=".activities.UserDetails" />
+        <activity
+            android:name=".activities.Tabs"
+            android:label="@string/title_activity_tabs"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activities.ViewlistsDescription"></activity>
     </application>
 
 </manifest>

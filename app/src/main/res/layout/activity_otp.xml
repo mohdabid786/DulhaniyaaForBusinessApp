@@ -9,7 +9,6 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/black_gradient_background"
         android:orientation="vertical">
 
 
@@ -29,7 +28,6 @@
                 android:layout_gravity="center"
                 android:background="@drawable/back"
                 android:padding="@dimen/dp_10" />
-
 
             <TextView
                 android:id="@+id/textView"
@@ -55,12 +53,12 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:text="@string/enter_your_otp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/sp_18"
                 />
 
@@ -74,8 +72,8 @@
 
                 <EditText
                     android:id="@+id/edit1"
-                    android:layout_width="@dimen/sp_40"
-                    android:layout_height="@dimen/sp_40"
+                    android:layout_width="@dimen/sp_45"
+                    android:layout_height="@dimen/sp_45"
                     android:layout_marginRight="@dimen/sp_20"
                     android:background="@drawable/round_edittext"
                     android:gravity="center"
@@ -86,8 +84,8 @@
 
                 <EditText
                     android:id="@+id/edit2"
-                    android:layout_width="@dimen/sp_40"
-                    android:layout_height="@dimen/sp_40"
+                    android:layout_width="@dimen/sp_45"
+                    android:layout_height="@dimen/sp_45"
                     android:layout_marginRight="@dimen/sp_20"
                     android:background="@drawable/round_edittext"
                     android:gravity="center"
@@ -97,8 +95,8 @@
 
                 <EditText
                     android:id="@+id/edit3"
-                    android:layout_width="@dimen/sp_40"
-                    android:layout_height="@dimen/sp_40"
+                    android:layout_width="@dimen/sp_45"
+                    android:layout_height="@dimen/sp_45"
                     android:layout_marginRight="@dimen/sp_20"
                     android:background="@drawable/round_edittext"
                     android:gravity="center"
@@ -108,24 +106,14 @@
 
                 <EditText
                     android:id="@+id/edit4"
-                    android:layout_width="@dimen/sp_40"
-                    android:layout_height="@dimen/sp_40"
+                    android:layout_width="@dimen/sp_45"
+                    android:layout_height="@dimen/sp_45"
                     android:layout_marginRight="@dimen/sp_20"
                     android:background="@drawable/round_edittext"
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
                     android:textColor="@color/white" />
-
-                <!--<EditText-->
-                <!--android:id="@+id/edit5"-->
-                <!--android:layout_width="@dimen/sp_40"-->
-                <!--android:layout_height="@dimen/sp_40"-->
-                <!--android:background="@drawable/round_edittext"-->
-                <!--android:gravity="center"-->
-                <!--android:inputType="number"-->
-                <!--android:maxLength="1"-->
-                <!--android:textColor="@color/white" />-->
 
             </LinearLayout>
 
@@ -143,7 +131,6 @@
                 android:textStyle="bold"
                 />
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -151,7 +138,7 @@
                 android:layout_marginTop="@dimen/sp_20"
                 android:gravity="center"
                 android:text="Resend"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/sp_18"
                 />
 

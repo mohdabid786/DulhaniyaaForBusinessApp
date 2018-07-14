@@ -1,6 +1,7 @@
 package com.dulhaniyaa.dulhaniyaaforbusinessapp.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,12 +31,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     TextView forget_password;
     CheckBox checkBox;
     Button login;
+    SharedPreferences spLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        spLogin = getSharedPreferences("LOGINSP",MODE_PRIVATE);
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
@@ -56,11 +60,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         switch (view.getId()) {
 
             case R.id.checkbox:
-                Intent intent = new Intent(Login.this, Home.class);
-                startActivity(intent);
+//                Intent intent = new Intent(Login.this, Home.class);
+//                startActivity(intent);
                 break;
             case R.id.forgot_password:
-                Intent intent1 = new Intent(Login.this, Home.class);
+                Intent intent1 = new Intent(Login.this, ForgotPassword.class);
                 startActivity(intent1);
                 break;
             case R.id.login:
@@ -88,6 +92,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         SharedPreferenceWriter.getInstance(Login.this).writeBooleanValue(SharedPreferenceKey.currentLogin, true);
                         SharedPreferenceWriter.getInstance(Login.this).writeStringValue(SharedPreferenceKey.NOTIFICATION_STATUS, response.body().getLogin().getStatus());
                         SharedPreferenceWriter.getInstance(Login.this).writeStringValue(SharedPreferenceKey.Email, response.body().getLogin().getEmail());
+
+                        SharedPreferences.Editor logedit = spLogin.edit();
+                        logedit.putBoolean("LOGIN_CHECK",true);
+                        // logedit.apply();
+                        logedit.commit();
+
                         Intent intent = new Intent(Login.this, Home.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

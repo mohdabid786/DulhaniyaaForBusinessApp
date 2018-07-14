@@ -147,5 +147,10 @@
     <string name="todo">TODO</string>
     <string name="email_update">Email \n (To edit these fields, contact us on vendors@dulhaniyaa.com)</string>
     <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="title_activity_tabs">Tabs</string>
+    <string name="share_whatsapp_not_instaled">share_whatsapp</string>
+    <string name="share_intent_title">share_intent_title</string>
+    <string name="save">Save</string>
+    <string name="message_here">Your Message Here...</string>
 
 </resources>

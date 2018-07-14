@@ -5,6 +5,7 @@ import com.dulhaniyaa.dulhaniyaaforbusinessapp.bean.CommonResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -22,7 +23,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("vendorLogin")
     Call<CommonResponse> getLoginResult(@Field("username") String email,
-                                        @Field("password") String pasword,
+                                        @Field("password") String password,
                                         @Field("device_type") String device_type,
                                         @Field("device_token") String device_token);
 
@@ -46,37 +47,31 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("forgotPassword")
-    Call<CommonResponse> getForgotResult(@Field("email") String email);
+    Call<CommonResponse> getForgotResult(@Field("username") String username);
 
     @FormUrlEncoded
     @POST("resetPassword")
-    Call<CommonResponse> getResetPasswordResult(@Field("otp") String token,
-                                                @Field("newPassword") String newPassword,
-                                                @Field("cnfPassword") String cnfPassword);
+    Call<CommonResponse> getResetPasswordResult(@Field("token") String token,
+                                                @Field("newPassword") String newPassword);
 
     @FormUrlEncoded
     @POST("logout")
     Call<CommonResponse> getLogoutResult(@Field("token") String token);
 
-    @FormUrlEncoded
-    @POST("get_all_cateogry")
-    Call<CommonResponse> getGetAllCateogryResult(@Field("token") String token);
+    @GET("get_all_cateogry")
+    Call<CommonResponse> getGetAllCateogryResult();
 
-    @FormUrlEncoded
-    @POST("get_all_state")
-    Call<CommonResponse> getGetAllStateResult(@Field("token") String token);
+    @GET("get_all_state")
+    Call<CommonResponse> getGetAllStateResult();
 
-    @FormUrlEncoded
-    @POST("venueareatype")
-    Call<CommonResponse> getVenueareatypeResult(@Field("token") String token);
+    @GET("venueareatype")
+    Call<CommonResponse> getVenueareatypeResult();
 
-    @FormUrlEncoded
-    @POST("paymentmode")
-    Call<CommonResponse> getPaymentmodeResult(@Field("token") String token);
+    @GET("paymentmode")
+    Call<CommonResponse> getPaymentmodeResult();
 
-    @FormUrlEncoded
-    @POST("workdays")
-    Call<CommonResponse> getWorkdayResult(@Field("token") String token);
+    @GET("workdays")
+    Call<CommonResponse> getWorkdayResult();
 
     @FormUrlEncoded
     @POST("VendorProfile")

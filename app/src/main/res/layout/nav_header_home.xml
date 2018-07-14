@@ -10,10 +10,10 @@
     <ImageView
         android:id="@+id/cat_banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_176sdp"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@drawable/coverbanner" />
 
     <LinearLayout
         android:id="@+id/header"
@@ -53,9 +53,9 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_below="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1,10 +1,9 @@
-
 package com.dulhaniyaa.dulhaniyaaforbusinessapp.bean;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class VendorProfile {
+class VendorProfile {
 
     @SerializedName("vendor_id")
     @Expose
@@ -15,15 +14,6 @@ public class VendorProfile {
     @SerializedName("state_id")
     @Expose
     private String stateId;
-    @SerializedName("admin_id")
-    @Expose
-    private String adminId;
-    @SerializedName("username")
-    @Expose
-    private String username;
-    @SerializedName("password")
-    @Expose
-    private String password;
     @SerializedName("business_name")
     @Expose
     private String businessName;
@@ -36,30 +26,66 @@ public class VendorProfile {
     @SerializedName("contact_phone")
     @Expose
     private String contactPhone;
-    @SerializedName("date_added")
+    @SerializedName("subid")
     @Expose
-    private String dateAdded;
-    @SerializedName("last_login")
+    private String subid;
+    @SerializedName("vb_budget")
     @Expose
-    private Object lastLogin;
-    @SerializedName("status")
+    private Object vbBudget;
+    @SerializedName("vb_estd")
     @Expose
-    private String status;
-    @SerializedName("other_cat")
+    private String vbEstd;
+    @SerializedName("vb_info")
     @Expose
-    private Object otherCat;
-    @SerializedName("other_city")
+    private String vbInfo;
+    @SerializedName("vb_address")
     @Expose
-    private Object otherCity;
-    @SerializedName("device_token")
+    private String vbAddress;
+    @SerializedName("vb_pincode")
     @Expose
-    private Object deviceToken;
-    @SerializedName("device_type")
+    private String vbPincode;
+    @SerializedName("vb_landmark")
     @Expose
-    private Object deviceType;
-    @SerializedName("token")
+    private String vbLandmark;
+    @SerializedName("pay_id")
     @Expose
-    private String token;
+    private String payId;
+    @SerializedName("work_id")
+    @Expose
+    private String workId;
+    @SerializedName("vb_media")
+    @Expose
+    private String vbMedia;
+    @SerializedName("vb_awards")
+    @Expose
+    private String vbAwards;
+    @SerializedName("vb_pastexp")
+    @Expose
+    private String vbPastexp;
+    @SerializedName("vb_online")
+    @Expose
+    private String vbOnline;
+    @SerializedName("vs_facebook")
+    @Expose
+    private String vsFacebook;
+    @SerializedName("vs_instagram")
+    @Expose
+    private String vsInstagram;
+    @SerializedName("vs_website")
+    @Expose
+    private String vsWebsite;
+    @SerializedName("vs_youtube")
+    @Expose
+    private String vsYoutube;
+    @SerializedName("vs_vimeo")
+    @Expose
+    private String vsVimeo;
+    @SerializedName("vs_pinterest")
+    @Expose
+    private String vsPinterest;
+    @SerializedName("vs_twitter")
+    @Expose
+    private String vsTwitter;
 
     public String getVendorId() {
         return vendorId;
@@ -83,30 +109,6 @@ public class VendorProfile {
 
     public void setStateId(String stateId) {
         this.stateId = stateId;
-    }
-
-    public String getAdminId() {
-        return adminId;
-    }
-
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getBusinessName() {
@@ -141,68 +143,164 @@ public class VendorProfile {
         this.contactPhone = contactPhone;
     }
 
-    public String getDateAdded() {
-        return dateAdded;
+    public String getSubid() {
+        return subid;
     }
 
-    public void setDateAdded(String dateAdded) {
-        this.dateAdded = dateAdded;
+    public void setSubid(String subid) {
+        this.subid = subid;
     }
 
-    public Object getLastLogin() {
-        return lastLogin;
+    public Object getVbBudget() {
+        return vbBudget;
     }
 
-    public void setLastLogin(Object lastLogin) {
-        this.lastLogin = lastLogin;
+    public void setVbBudget(Object vbBudget) {
+        this.vbBudget = vbBudget;
     }
 
-    public String getStatus() {
-        return status;
+    public String getVbEstd() {
+        return vbEstd;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setVbEstd(String vbEstd) {
+        this.vbEstd = vbEstd;
     }
 
-    public Object getOtherCat() {
-        return otherCat;
+    public String getVbInfo() {
+        return vbInfo;
     }
 
-    public void setOtherCat(Object otherCat) {
-        this.otherCat = otherCat;
+    public void setVbInfo(String vbInfo) {
+        this.vbInfo = vbInfo;
     }
 
-    public Object getOtherCity() {
-        return otherCity;
+    public String getVbAddress() {
+        return vbAddress;
     }
 
-    public void setOtherCity(Object otherCity) {
-        this.otherCity = otherCity;
+    public void setVbAddress(String vbAddress) {
+        this.vbAddress = vbAddress;
     }
 
-    public Object getDeviceToken() {
-        return deviceToken;
+    public String getVbPincode() {
+        return vbPincode;
     }
 
-    public void setDeviceToken(Object deviceToken) {
-        this.deviceToken = deviceToken;
+    public void setVbPincode(String vbPincode) {
+        this.vbPincode = vbPincode;
     }
 
-    public Object getDeviceType() {
-        return deviceType;
+    public String getVbLandmark() {
+        return vbLandmark;
     }
 
-    public void setDeviceType(Object deviceType) {
-        this.deviceType = deviceType;
+    public void setVbLandmark(String vbLandmark) {
+        this.vbLandmark = vbLandmark;
     }
 
-    public String getToken() {
-        return token;
+    public String getPayId() {
+        return payId;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setPayId(String payId) {
+        this.payId = payId;
+    }
+
+    public String getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(String workId) {
+        this.workId = workId;
+    }
+
+    public String getVbMedia() {
+        return vbMedia;
+    }
+
+    public void setVbMedia(String vbMedia) {
+        this.vbMedia = vbMedia;
+    }
+
+    public String getVbAwards() {
+        return vbAwards;
+    }
+
+    public void setVbAwards(String vbAwards) {
+        this.vbAwards = vbAwards;
+    }
+
+    public String getVbPastexp() {
+        return vbPastexp;
+    }
+
+    public void setVbPastexp(String vbPastexp) {
+        this.vbPastexp = vbPastexp;
+    }
+
+    public String getVbOnline() {
+        return vbOnline;
+    }
+
+    public void setVbOnline(String vbOnline) {
+        this.vbOnline = vbOnline;
+    }
+
+    public String getVsFacebook() {
+        return vsFacebook;
+    }
+
+    public void setVsFacebook(String vsFacebook) {
+        this.vsFacebook = vsFacebook;
+    }
+
+    public String getVsInstagram() {
+        return vsInstagram;
+    }
+
+    public void setVsInstagram(String vsInstagram) {
+        this.vsInstagram = vsInstagram;
+    }
+
+    public String getVsWebsite() {
+        return vsWebsite;
+    }
+
+    public void setVsWebsite(String vsWebsite) {
+        this.vsWebsite = vsWebsite;
+    }
+
+    public String getVsYoutube() {
+        return vsYoutube;
+    }
+
+    public void setVsYoutube(String vsYoutube) {
+        this.vsYoutube = vsYoutube;
+    }
+
+    public String getVsVimeo() {
+        return vsVimeo;
+    }
+
+    public void setVsVimeo(String vsVimeo) {
+        this.vsVimeo = vsVimeo;
+    }
+
+    public String getVsPinterest() {
+        return vsPinterest;
+    }
+
+    public void setVsPinterest(String vsPinterest) {
+        this.vsPinterest = vsPinterest;
+    }
+
+    public String getVsTwitter() {
+        return vsTwitter;
+    }
+
+    public void setVsTwitter(String vsTwitter) {
+        this.vsTwitter = vsTwitter;
     }
 
 }

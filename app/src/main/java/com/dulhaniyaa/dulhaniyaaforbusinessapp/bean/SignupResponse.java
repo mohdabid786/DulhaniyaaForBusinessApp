@@ -64,14 +64,6 @@ public class SignupResponse {
         this.password = password;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getToken() {
         return token;
     }
